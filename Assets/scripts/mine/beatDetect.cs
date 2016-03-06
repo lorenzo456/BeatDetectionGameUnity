@@ -19,13 +19,13 @@ public class beatDetect : MonoBehaviour {
         float[] spectrum = new float[1024];
         AudioListener.GetSpectrumData(spectrum, 0, FFTWindow.Hamming);
 
-        previousScale.y = Mathf.Lerp(previousScale.y, 1 + spectrum[mySpect] * 40, Time.deltaTime * 30);
+        previousScale.z = Mathf.Lerp(previousScale.z, 1 + spectrum[mySpect] * 40, Time.deltaTime * 30);
         //transform.position = new Vector3(previousPosition.x, (previousPosition.y + spectrum[mySpect] * 40) / 2, previousPosition.z);
-        previousPosition.y = Mathf.Lerp(previousPosition.y ,(previousPosition.y + spectrum[mySpect] * 40), Time.deltaTime * 30) / 2;
+        previousPosition.z = Mathf.Lerp(previousPosition.z ,(previousPosition.z + spectrum[mySpect] * 40), Time.deltaTime * 30) / 2;
 
         //previousScale.z = Mathf.Lerp(previousScale.z, spectrum[1] * 40, Time.deltaTime * 30);
         this.transform.localScale = previousScale;
-        this.transform.position = previousPosition;
+        this.transform.position = new Vector3(this.transform.position.x,this.transform.position.y,previousPosition.z);
 
     }
 }
